@@ -35,24 +35,28 @@ We built it in Java for simplicity and portability, using plain `System.in`/`Sys
    ```bash
    git clone https://github.com/your-username/tic-tac-toe-console.git
    cd tic-tac-toe-console
+   ```
 
 2. **Verify Java installation**
    ```bash
    java -version
    javac -version
-
+   ```
+   
 ## Building the App
 
 You can build the app using:
 ```bash
 mkdir -p out
 javac -d out src/main/java/org/example/App.java
+```
 
 ## Run the App
 
 You can run the app using: 
 ```bash
 java -cp out org.example.App
+```
 
 ## Testing the App
 
@@ -62,10 +66,12 @@ javac -d out \
   --module-path path/to/junit-platform-console-standalone.jar \
   --add-modules junit \
   src/test/java/org/example/AppTest.java
-
+```
+```bash
 java -jar path/to/junit-platform-console-standalone.jar \
   --class-path out \
   --scan-class-path
+```
 
 ## How to Use
 
