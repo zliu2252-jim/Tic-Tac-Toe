@@ -86,9 +86,9 @@ java -jar path/to/junit-platform-console-standalone.jar \
 
 ## Credits
 
-Author: Zhengjia Liu
-Inspiration: Tic-Tac-Toe game
-Testing: JUnit 5 Testing
+1. Author: Zhengjia Liu
+2. Inspiration: Tic-Tac-Toe game
+3. Testing: JUnit 5 Testing
 
 ## License
 
