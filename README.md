@@ -1,8 +1,13 @@
 # Tic-Tac-Toe (Java)
 
-You can find the instructions for this lab [here](https://morethanequations.com/Computer-Science/Portfolio-Projects/Tic-Tac-Toe). Create a new repository on GitHub to house your code. Be sure to make the repository public so that I can view and grade it.
+A simple two-player Tic-Tac-Toe game you can run in the terminal, written in Java with Gradle. Includes full input validation, win/draw detection, a “play again” loop, and end-to-end JUnit tests.
 
-We will use [Gradle](https://gradle.org/) to automate common development tasks.
+## Cloning the Repository & Initial Setup
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-username/tic-tac-toe-console.git
+   cd tic-tac-toe-console
 
 ## Building the App
 
