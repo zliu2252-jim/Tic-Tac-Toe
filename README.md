@@ -47,30 +47,21 @@ We built it in Java for simplicity, using plain `System.in`/`System.out` and a 2
 
 You can build the app using:
 ```bash
-mkdir -p out
-javac -d out src/main/java/org/example/App.java
+./gradlew build
 ```
 
 ## Run the App
 
 You can run the app using: 
 ```bash
-java -cp out org.example.App
+./gradlew run --quiet --console=plain
 ```
 
 ## Testing the App
 
 You can run the automated suite of tests using:
 ```bash
-javac -d out \
-  --module-path path/to/junit-platform-console-standalone.jar \
-  --add-modules junit \
-  src/test/java/org/example/AppTest.java
-```
-```bash
-java -jar path/to/junit-platform-console-standalone.jar \
-  --class-path out \
-  --scan-class-path
+./gradlew test
 ```
 
 ## How to Use
