@@ -16,9 +16,9 @@ A simple two-player Tic-Tac-Toe game you can run in the terminal, written in Jav
 
 ## Project Description
 
-Tic-Tac-Toe is a classic game played on a 3*3 grid. In this console version, two human players alternate placing **X** and **O** in cells numbered 1–9. The program validates every move (must be numeric, between 1 and 9, and on an unoccupied cell), detects wins (three in a row horizontally, vertically, or diagonally) and draws (full board with no winner), and then prompts players to play again—all without ever crashing on bad input.
+Tic-Tac-Toe is a classic game played on a 3*3 grid. In this console version, two human players alternate placing **X** and **O** in cells numbered 1 through 9. The program validates every move; the value that is entered in the cell must be numeric, between 1 and 9, and on an unoccupied cell, detects wins (three in a row horizontally, vertically, or diagonally) and draws (the whole board with no winner), and then prompts players to play again—all without crashing on bad input.
 
-We built it in Java for simplicity and portability, using plain `System.in`/`System.out` and a 2D `char` array for the board. Challenges included robustly handling all forms of invalid input (letters, out-of-range numbers, occupied cells) and designing clear console prompts.
+We built it in Java for simplicity, using plain `System.in`/`System.out` and a 2D `char` array for the board. Challenges included robustly handling all forms of invalid input (letters, out-of-range numbers, occupied cells, blank) and designing clear console prompts.
 
 ## Features
 
