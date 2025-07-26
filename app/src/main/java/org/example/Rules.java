@@ -1,72 +1,69 @@
 package org.example;
 
 /**
- * This class contains static methods to check the game status,
- * validating moves, and determining if a player ('X' or 'O') has won in Tic-Tac-Toe.
+ * This class contains methods to check game status and move validity for Tic-Tac-Toe.
+ * It can determine if the game is finished, if a player has won, or if a move is valid.
  */
 public class Rules {
 
     /**
-     * Checks if the Tic-Tac-Toe board state ends the game.
-     * Prints the final board and a message if there is a winner or a tie.
+     * Determines whether the game has ended by a win or tie.
+     * If a player has won, prints the final board and returns true.
+     * If the board is full (tie), prints the final board and returns true.
+     * Otherwise, returns false.
      *
-     * @param board The Board object representing the Tic-Tac-Toe board
-     * @return true if the game has ended, false otherwise
+     * @param board the Board object representing the current state
+     * @return true if the game is finished (win or tie), false otherwise
      */
-    public static boolean isGameFinished(Board board) {
-        char[][] b = board.getBoard();
-        // Check for win by X
-        if (hasContestantWon(board, 'X')) {
+    public boolean isGameFinished(Board board) {
+        String[][] b = board.board;
+        // Check if X has won
+        if (hasContestantWon(b, "  X  ")) {
             board.printBoard();
-            System.out.println("Player X wins!");
             return true;
         }
-        // Check for win by O
-        if (hasContestantWon(board, 'O')) {
+        // Check if O has won
+        if (hasContestantWon(b, "  O  ")) {
             board.printBoard();
-            System.out.println("Player O wins!");
             return true;
         }
-        // Check for tie
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                char c = b[i][j];
-                if (c != 'X' && c != 'O') {
-                    return false;
-                }
-            }
-        }
+        // Check for empty spaces; if any, the game is not finished
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                if (!b[i][j].equals("  X  ") && !b[i][j].equals("  O  ")) return false;
+        // If board is full and no winner, it's a tie
         board.printBoard();
-        System.out.println("The game ended in a tie!");
         return true;
     }
 
     /**
-     * Checks if the given player has won the game.
-     * A win is three matching symbols in a row, column, or diagonal.
+     * Determines whether the given symbol has won on the board.
      *
-     * @param board The Board object representing the Tic-Tac-Toe board
-     * @param symbol The player's symbol ('X' or 'O')
-     * @return true if the player has won, false otherwise
+     * @param b      the game board (String[][])
+     * @param symbol the symbol to check for a win
+     * @return true if the symbol has a winning row, column, or diagonal
      */
-    public static boolean hasContestantWon(Board board, char symbol) {
-        char[][] b = board.getBoard();
+    public boolean hasContestantWon(String[][] b, String symbol) {
         return
-                (b[0][0]==symbol && b[0][1]==symbol && b[0][2]==symbol) ||
-                        (b[1][0]==symbol && b[1][1]==symbol && b[1][2]==symbol) ||
-                        (b[2][0]==symbol && b[2][1]==symbol && b[2][2]==symbol) ||
-                        (b[0][0]==symbol && b[1][0]==symbol && b[2][0]==symbol) ||
-                        (b[0][1]==symbol && b[1][1]==symbol && b[2][1]==symbol) ||
-                        (b[0][2]==symbol && b[1][2]==symbol && b[2][2]==symbol) ||
-                        (b[0][0]==symbol && b[1][1]==symbol && b[2][2]==symbol) ||
-                        (b[0][2]==symbol && b[1][1]==symbol && b[2][0]==symbol);
+                // Check rows
+                (b[0][0].equals(symbol) && b[0][1].equals(symbol) && b[0][2].equals(symbol)) ||
+                        (b[1][0].equals(symbol) && b[1][1].equals(symbol) && b[1][2].equals(symbol)) ||
+                        (b[2][0].equals(symbol) && b[2][1].equals(symbol) && b[2][2].equals(symbol)) ||
+                        // Check columns
+                        (b[0][0].equals(symbol) && b[1][0].equals(symbol) && b[2][0].equals(symbol)) ||
+                        (b[0][1].equals(symbol) && b[1][1].equals(symbol) && b[2][1].equals(symbol)) ||
+                        (b[0][2].equals(symbol) && b[1][2].equals(symbol) && b[2][2].equals(symbol)) ||
+                        // Check diagonals
+                        (b[0][0].equals(symbol) && b[1][1].equals(symbol) && b[2][2].equals(symbol)) ||
+                        (b[0][2].equals(symbol) && b[1][1].equals(symbol) && b[2][0].equals(symbol));
     }
 
     /**
-     * Validates if a player's move is legal.
+     * Checks whether the given move is valid: the input must be a digit from 1-9,
+     * and the corresponding cell must not already be taken.
      *
-     * @param board The Board object representing the Tic-Tac-Toe board
-     * @param position The player's input string (1-9)
+     * @param board    the Board object representing the current game state
+     * @param position the cell number as a string
      * @return true if the move is valid, false otherwise
      */
     public static boolean isValidMove(Board board, String position) {
@@ -78,7 +75,8 @@ public class Rules {
         }
         if (cell < 1 || cell > 9) return false;
         int row = (cell - 1) / 3, col = (cell - 1) % 3;
-        char val = board.getCell(row, col);
-        return val != 'X' && val != 'O';
+        String valid = board.board[row][col];
+        // Move is valid if the cell does not already contain X or O
+        return !valid.equals("  X  ") && !valid.equals("  O  ");
     }
 }
