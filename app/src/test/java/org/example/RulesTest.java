@@ -4,57 +4,64 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the Rules class, which checks game logic such as
- * win detection.
+ * This class contains unit tests for the Rules class,
+ * verifying detection of win conditions for horizontal, vertical, diagonal, and no-win cases.
  */
 class RulesTest {
 
     /**
-     * Tests that hasContestantWon detects a win in the first row.
+     * Tests that a horizontal row of matching symbols is detected as a win.
      */
     @Test
-    void testRowWin() {
-        Board board = new Board();
-        board.setCell(0,0,'O');
-        board.setCell(0,1,'O');
-        board.setCell(0,2,'O');
-        assertTrue(Rules.hasContestantWon(board, 'O'));
+    void testHorizontalWin() {
+        Rules rules = new Rules();
+        String[][] b = {
+                {"  X  ", "  X  ", "  X  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        assertTrue(rules.hasContestantWon(b, "  X  "));
     }
 
     /**
-     * Tests that hasContestantWon detects a win in the last column.
+     * Tests that a vertical column of matching symbols is detected as a win.
      */
     @Test
-    void testColWin() {
-        Board board = new Board();
-        board.setCell(0,2,'X');
-        board.setCell(1,2,'X');
-        board.setCell(2,2,'X');
-        assertTrue(Rules.hasContestantWon(board, 'X'));
+    void testVerticalWin() {
+        Rules rules = new Rules();
+        String[][] b = {
+                {"  X  ", "  O  ", "  O  "},
+                {"  X  ", "  5  ", "  6  "},
+                {"  X  ", "  8  ", "  9  "}
+        };
+        assertTrue(rules.hasContestantWon(b, "  X  "));
     }
 
     /**
-     * Tests that hasContestantWon detects a win on the main diagonal.
+     * Tests that a diagonal of matching symbols is detected as a win.
      */
     @Test
     void testDiagonalWin() {
-        Board board = new Board();
-        board.setCell(0,0,'X');
-        board.setCell(1,1,'X');
-        board.setCell(2,2,'X');
-        assertTrue(Rules.hasContestantWon(board, 'X'));
+        Rules rules = new Rules();
+        String[][] b = {
+                {"  X  ", "  O  ", "  3  "},
+                {"  4  ", "  X  ", "  O  "},
+                {"  7  ", "  8  ", "  X  "}
+        };
+        assertTrue(rules.hasContestantWon(b, "  X  "));
     }
 
     /**
-     * Tests isValidMove for valid.
+     * Tests that a board with no winning row, column, or diagonal returns no win.
      */
     @Test
-    void testIsValidMoveTrueFalse() {
-        Board board = new Board();
-        assertTrue(Rules.isValidMove(board, "1"));
-        board.setCell(0,0,'X');
-        assertFalse(Rules.isValidMove(board, "1"));
-        assertFalse(Rules.isValidMove(board, "10"));
-        assertFalse(Rules.isValidMove(board, "abc"));
+    void testNoWin() {
+        Rules rules = new Rules();
+        String[][] b = {
+                {"  X  ", "  O  ", "  X  "},
+                {"  O  ", "  O  ", "  X  "},
+                {"  X  ", "  X  ", "  O  "}
+        };
+        assertFalse(rules.hasContestantWon(b, "  X  "));
     }
 }
