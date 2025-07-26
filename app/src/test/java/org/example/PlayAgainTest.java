@@ -6,48 +6,48 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the PlayAgain class, which handles user prompts
- * for playing the Tic-Tac-Toe again.
+ * This class contains unit tests for the PlayAgain utility class.
+ * It checks valid and accepted user input for replay prompt logic.
  */
 class PlayAgainTest {
 
     /**
-     * Tests that input "yes" returns true.
+     * Tests that input "yes" returns true for replay.
      */
     @Test
     void testAskPlayAgainYes() {
-        ByteArrayInputStream in = new ByteArrayInputStream("yes\n".getBytes());
-        Scanner scanner = new Scanner(in);
-        assertTrue(PlayAgain.askPlayAgain(scanner));
+        String simulatedInput = "yes\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        assertTrue(PlayAgain.askPlayAgain(scnr));
     }
 
     /**
-     * Tests that input "y" returns true.
-     */
-    @Test
-    void testAskPlayAgainY() {
-        ByteArrayInputStream in = new ByteArrayInputStream("y\n".getBytes());
-        Scanner scanner = new Scanner(in);
-        assertTrue(PlayAgain.askPlayAgain(scanner));
-    }
-
-    /**
-     * Tests that input "no" returns false.
+     * Tests that input "no" returns false for replay.
      */
     @Test
     void testAskPlayAgainNo() {
-        ByteArrayInputStream in = new ByteArrayInputStream("no\n".getBytes());
-        Scanner scanner = new Scanner(in);
-        assertFalse(PlayAgain.askPlayAgain(scanner));
+        String simulatedInput = "no\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        assertFalse(PlayAgain.askPlayAgain(scnr));
     }
 
     /**
-     * Tests that input "n" returns false.
+     * Tests that input "y" returns true for replay.
+     */
+    @Test
+    void testAskPlayAgainY() {
+        String simulatedInput = "y\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        assertTrue(PlayAgain.askPlayAgain(scnr));
+    }
+
+    /**
+     * Tests that input "n" returns false for replay.
      */
     @Test
     void testAskPlayAgainN() {
-        ByteArrayInputStream in = new ByteArrayInputStream("n\n".getBytes());
-        Scanner scanner = new Scanner(in);
-        assertFalse(PlayAgain.askPlayAgain(scanner));
+        String simulatedInput = "n\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        assertFalse(PlayAgain.askPlayAgain(scnr));
     }
 }
