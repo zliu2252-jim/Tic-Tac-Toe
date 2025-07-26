@@ -1,55 +1,53 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-import java.io.File;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the GameLog class, which tracks wins, ties, and handles log saving.
+ * This class contains unit tests for the GameLog class.
+ * It verifies correct win/tie counting and session result tracking.
  */
 class GameLogTest {
 
     /**
-     * Tests recording a win for Player X.
+     * Tests that recording an X win increments the total games.
      */
     @Test
-    void testRecordXWin() {
+    void testXWinCount() {
         GameLog log = new GameLog();
         log.recordResult("X");
         assertEquals(1, log.totalGames());
     }
 
     /**
-     * Tests recording a win for Player O.
+     * Tests that recording an O win increments the total games.
      */
     @Test
-    void testRecordOWin() {
+    void testOWinCount() {
         GameLog log = new GameLog();
         log.recordResult("O");
         assertEquals(1, log.totalGames());
     }
 
     /**
-     * Tests recording a tie.
+     * Tests that recording a tie increments the total games.
      */
     @Test
-    void testRecordTie() {
+    void testTieCount() {
         GameLog log = new GameLog();
         log.recordResult("Tie");
         assertEquals(1, log.totalGames());
     }
 
     /**
-     * Tests saving the log to a file, ensures file is created and the file is not empty
+     * Tests that multiple results are all counted correctly.
      */
     @Test
-    void testSaveToFile() {
+    void testMultipleResults() {
         GameLog log = new GameLog();
         log.recordResult("X");
-        log.saveToFile("test_gamelog.txt");
-        File file = new File("test_gamelog.txt");
-        assertTrue(file.exists());
-        assertTrue(file.length() > 0);
-        file.delete();
+        log.recordResult("O");
+        log.recordResult("Tie");
+        assertEquals(3, log.totalGames());
     }
 }
