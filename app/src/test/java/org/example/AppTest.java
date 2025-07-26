@@ -4,15 +4,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This test contains basic structural tests for the App class,
- * ensuring that it loads correctly, and contains the expected methods.
- * These tests verify the presence and accessibility
- * of the main application entry point.
+ * This test class contains basic structural tests for the App class,
+ * ensuring that it loads correctly and contains the expected methods.
  */
 class AppTest {
 
     /**
-     * Test that the App class can be loaded without throwing any exceptions.
+     * Test the App class can be loaded without throwing any exceptions.
      */
     @Test
     void testAppClassLoads() {
