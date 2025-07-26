@@ -4,23 +4,22 @@ import java.util.Scanner;
 
 /**
  * This class represents a human player in the Tic-Tac-Toe game.
- * It handles prompting the player for their move and placing their symbol
- * on the board.
+ * It is responsible for prompting the user for input, validating moves,
+ * and updating the board for the human's turn.
  */
 public class Human {
-    // The symbol for this player ('X' or 'O')
+    /** The character symbol representing this player. */
     private final char symbol;
-    // The game board for the two players using
+    /** The board object to update when the player makes a move. */
     private final Board board;
-    // Scanner for reading user input
+    /** Scanner for reading user input from the console. */
     private final Scanner scanner;
 
     /**
-     * Constructs the new Human player with the given symbol, board, and scanner.
-     *
-     * @param symbol the player's symbol ('X' or 'O')
-     * @param board the Board object representing the Tic-Tac-Toe game
-     * @param scanner the Scanner for reading user input
+     * Constructs a new Human player.
+     * @param symbol  the symbol for this player
+     * @param board   the board the player interacts with
+     * @param scanner the Scanner for user input
      */
     public Human(char symbol, Board board, Scanner scanner) {
         this.symbol = symbol;
@@ -29,20 +28,21 @@ public class Human {
     }
 
     /**
-     * Prompts the player to enter their move, validates the input,
-     * and places the symbol on the board if the move is valid.
-     * Keeps prompting until a valid move is entered.
+     * Prompts the user to enter their move, validates it, and updates the board.
      */
     public void move() {
         String inp;
         while (true) {
-            System.out.print("Player " + symbol + ", what is your move? (1-9): ");
+            // Prompt the user for a move
+            System.out.print("What is your move? ");
             inp = scanner.nextLine().trim();
+            // Check if the move is valid and, if so, update the board and exit.
             if (Rules.isValidMove(board, inp)) {
                 Player.placeMove(board, inp, symbol);
                 break;
             } else {
-                System.out.println(inp + " is not a valid move");
+                // Invalid move entered
+                System.out.println("\nThat is not a valid move! Try again.\n");
             }
         }
     }
