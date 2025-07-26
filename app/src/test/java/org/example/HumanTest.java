@@ -1,54 +1,85 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the Human class, representing a human player in the game.
+ * This class contains unit tests for the Human class.
+ * It verifies user move placement, input validation, and symbol correctness.
  */
 class HumanTest {
 
     /**
-     * Test that a Human object is successfully constructed with valid arguments.
+     * Tests that the Human move method places the correct symbol at the chosen cell.
      */
     @Test
-    void testHumanConstructor() {
-        Board board = new Board();
-        Human human = new Human('X', board, new java.util.Scanner(System.in));
-        assertNotNull(human);
+    void testMovePlacesCorrectSymbol() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        String simulatedInput = "1\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        Human human = new Human('X', board, scnr);
+        human.move();
+        assertEquals("  X  ", board.board[0][0]);
     }
 
     /**
-     * Test that creating a Human object does not throw, and it can accept a different symbol.
+     * Tests that the Human move method rejects an invalid input and prompts again.
      */
     @Test
-    void testMoveDoesNotThrow() {
-        Board board = new Board();
-        Human human = new Human('O', board, new java.util.Scanner(System.in));
-        // Just test construction. (move requires input, see next test)
-        assertNotNull(human);
+    void testMoveRejectsInvalid() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        String simulatedInput = "11\n2\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        Human human = new Human('O', board, scnr);
+        human.move();
+        assertEquals("  O  ", board.board[0][1]);
     }
 
     /**
-     * Test that a Human object with symbol 'X' is not null.
+     * Tests that the Human can make a move to a different cell.
      */
     @Test
-    void testHumanHasSymbol() {
-        Board board = new Board();
-        Human human = new Human('X', board, new java.util.Scanner(System.in));
-        // No public accessor but object should exist
-        assertNotNull(human);
+    void testMultipleMoves() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        String simulatedInput = "5\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        Human human = new Human('X', board, scnr);
+        human.move();
+        assertEquals("  X  ", board.board[1][1]);
     }
 
     /**
-     * Test that a Human object can be constructed using a provided Scanner object.
+     * Tests that the Human move method uses the correct symbol for the player.
      */
     @Test
-    void testHumanObjectWithScanner() {
-        Board board = new Board();
-        Scanner scanner = new Scanner(System.in);
-        Human human = new Human('X', board, scanner);
-        assertNotNull(human);
+    void testSymbolSetCorrectly() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        String simulatedInput = "3\n";
+        Scanner scnr = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        Human human = new Human('O', board, scnr);
+        human.move();
+        assertEquals("  O  ", board.board[0][2]);
     }
 }
