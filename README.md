@@ -1,6 +1,6 @@
 # Tic-Tac-Toe (Java)
 
-A simple two-player Tic-Tac-Toe game you can run in the terminal, written in Java with Gradle. The game has a running game log, round-by-round statistics, alternating which player goes first, and automatic game log saving. Also, the program ncludes full input validation, win/draw detection, a “play again” loop, and end-to-end JUnit tests.
+The Tic-Tac-Toe game written in Java with Gradle. The game supports Human vs Human, Human vs. Computer, and Computer vs. Human modes. It features full input validation, win/draw detection, alternating who goes first, automatic statistics and game log saving, and a computer player. The program also include the JUnit 5 test. 
 
 ## Table of Contents
 
@@ -18,6 +18,8 @@ A simple two-player Tic-Tac-Toe game you can run in the terminal, written in Jav
 
 Tic-Tac-Toe is a classic game played on a 3*3 grid. In this console version, two human players alternate placing **X** and **O** in cells numbered 1 through 9. The program validates every move; the value that is entered in the cell must be numeric, between 1 and 9, and on an unoccupied cell, detects wins (three in a row horizontally, vertically, or diagonally) and draws (the whole board with no winner), and then prompts players to play again—all without crashing on bad input. After each round, the program prints nicely formatted statistics showing the current number of wins for each player and the number of ties. When you decide not to play again, the game log for the session is saved to disk in a clearly formatted text file. The starting player alternates: the loser of the previous round always goes first in the next game. If the round was a tie, the first and second players swap. You don’t need to load the game log on a new run—the tally only counts games from the current session. If you enter an invalid cell or blank, the program will warn you, and if you give invalid input to the play-again prompt, it will also warn you.
 
+In addition to human-vs-human play, the game supports both "Human vs Computer" and "Computer vs Human" modes, where a computer player can compete against a human. The computer follows a simple strategy: it will take a random corner for its first move, choose the center for its second move if available, win immediately if possible, block the opponent’s winning move if necessary, and otherwise pick a random open spot. The board always displays the computer’s move before prompting the user, ensuring a natural gameplay flow. All input is robustly validated, and the program includes a comprehensive suite of JUnit 5 tests to ensure correctness and reliability.
+
 We built it in Java for simplicity, using plain `System.in`/`System.out` and a 2D `char` array for the board. Challenges included robustly handling all forms of invalid input (letters, out-of-range numbers, occupied cells, blank) and designing clear console prompts.
 
 ## Features
@@ -26,6 +28,7 @@ We built it in Java for simplicity, using plain `System.in`/`System.out` and a 2
 - Numbered cells (1–9) for intuitive input  
 - Full input validation  
 - Automatic win/draw detection
+- Opportunistic computer player
 - Game log tracks wins, losses, and ties, and prints statistics after each round
 - When the game exits, the full game log is saved to the disk in the game.txt file.
 - The loser goes first in the next game; if a round is tied, the starting player alternates. 
@@ -69,17 +72,18 @@ You can run the automated suite of tests using:
 
 ## How to Use
 
-1. At the beginning of the program, it contains a welcome message. 
-2. When the program asks "Player X, what is your move? (1-9)" or "Player O, what is your move? (1-9)", please enter a move by typing the number from 1 to 9.
-3. If you enter an invalid input or blank, the program will warn you, "This is not a valid move. Try again."
-4. Watch the board update after each valid move.
-5. When someone wins, or it’s a draw, you’ll see: "Player X wins!" or "Player O wins!" or "The game ended in a tie!"
-6. After each round, statistics are printed showing Player X Wins, Player O Wins, and Ties so far. 
-7. At the end of the program, it may ask you to play again; you can enter yes or no.
-8. If you play again, the loser of the previous round goes first in the new game. If the round was a tie, the starting player alternates. 
-9. If you enter a blank rather than "yes" or "no", the program will warn you, "That is not a valid entry!"
-10. When you enter no, you will see a "Goodbye!" message.
-11. The game log file contains the wins, losses, and ties from the session. 
+1. At the beginning of the program, it contains a welcome message and a menu to select the game mode.
+2. Enter a number (1-3) to select Human vs Human, HUman vs Computer, or Computer vs Human. 
+3. When the program asks "Player X, what is your move? (1-9)" or "Player O, what is your move? (1-9)", please enter a move by typing the number from 1 to 9.
+4. If you enter an invalid input or blank, the program will warn you, "This is not a valid move. Try again."
+5. Watch the board update after each valid move.
+6. When someone wins, or it’s a draw, you’ll see: "Player X wins!" or "Player O wins!" or "The game ended in a tie!"
+7. After each round, statistics are printed showing Player X Wins, Player O Wins, and Ties so far. 
+8. At the end of the program, it may ask you to play again; you can enter yes or no.
+9. If you play again, the loser of the previous round goes first in the new game. If the round was a tie, the starting player alternates. 
+10. If you enter a blank rather than "yes" or "no", the program will warn you, "That is not a valid entry!"
+11. When you enter no, you will see a "Goodbye!" message.
+12. The game log file contains the wins, losses, and ties from the session. 
 
 ## Credits
 
