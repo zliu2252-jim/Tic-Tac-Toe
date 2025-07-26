@@ -4,37 +4,37 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * This class is about the game log, it is
- * responsible for keeping track of wins for each player and ties
- * during a Tic-Tac-Toe game process.
- * It can print current statistics, record each round, and save the full log to disk.
+ * This class tracks and logs the results of Tic-Tac-Toe games within a session.
+ * It records the number of wins for X and O, the number of ties, and can print
+ * or save the result to a file.
  */
 public class GameLog {
-    // Number of wins for Player X
+    /** Counter for number of games won by X. */
     private int xWins = 0;
-    // Number of wins for Player O
+    /** Counter for number of games won by O. */
     private int oWins = 0;
-    // Number of tie games
+    /** Counter for number of games that ended in a tie. */
     private int ties = 0;
-    // StringBuilder to get the log output
+    /** StringBuilder used to accumulate a session log for printing or saving. */
     private final StringBuilder logBuilder = new StringBuilder();
 
     /**
-     * Constructs a new GameLog and initializes the log with a title.
+     * Constructs a new GameLog and initializes the session header.
      */
     public GameLog() {
         logBuilder.append("Tic-Tac-Toe Game Log\n\n");
     }
 
     /**
-     * Records the result of a round and updates the game log.
-     *
+     * Records the result of a game and updates the log.
      * @param winner "X", "O", or "Tie"
      */
     public void recordResult(String winner) {
+        // Update counters
         if ("X".equals(winner)) xWins++;
         else if ("O".equals(winner)) oWins++;
         else ties++;
+        // Append current statistics to the session log
         logBuilder.append("After game ").append(totalGames()).append(":\n");
         logBuilder.append("Player X Wins   ").append(xWins).append("\n");
         logBuilder.append("Player O Wins   ").append(oWins).append("\n");
@@ -42,7 +42,7 @@ public class GameLog {
     }
 
     /**
-     * Prints the current number of wins and ties to the console.
+     * Prints the current game statistics to the console.
      */
     public void printCurrentStats() {
         System.out.println("Player X Wins   " + xWins);
@@ -52,21 +52,20 @@ public class GameLog {
     }
 
     /**
-     * Saves the full game log to a file with the given filename.
-     *
-     * @param filename the name of the file to save the game log
+     * Saves the log to a specified file.
+     * @param filename the name of the file to write
      */
     public void saveToFile(String filename) {
         try (FileWriter fw = new FileWriter(filename)) {
             fw.write(logBuilder.toString());
-            System.out.println("(Saved successfully!)");
         } catch (IOException e) {
             System.out.println("Error writing log: " + e.getMessage());
         }
     }
 
     /**
-     * @return The total number of games played
+     * Returns the total number of games played in this session.
+     * @return total games played
      */
     public int totalGames() {
         return xWins + oWins + ties;
