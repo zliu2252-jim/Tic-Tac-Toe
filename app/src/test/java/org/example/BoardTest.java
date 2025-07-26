@@ -4,46 +4,67 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This is Unit test for the Board class, which manages the Tic-Tac-Toe board state.
+ * This class contains unit tests for the Board class.
+ * It checks board initialization, updating, reference sharing, and dimensions.
  */
 class BoardTest {
 
     /**
-     * Tests that a new Board is initialized with characters 1-9.
+     * Tests that the board is initialized with the correct cell values.
      */
     @Test
-    void testBoardInitialization() {
-        Board board = new Board();
-        char[][] grid = board.getBoard();
-        assertEquals('1', grid[0][0]);
-        assertEquals('9', grid[2][2]);
+    void testInitialBoardState() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        assertEquals("  5  ", board.board[1][1]);
     }
 
     /**
-     * Tests that setCell correctly sets a symbol at the assigned location.
+     * Tests updating a board cell and checks if the update is reflected.
      */
     @Test
-    void testSetCell() {
-        Board board = new Board();
-        board.setCell(2, 2, 'O');
-        assertEquals('O', board.getCell(2, 2));
+    void testBoardUpdate() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        board.board[2][2] = "  X  ";
+        assertEquals("  X  ", board.board[2][2]);
     }
 
     /**
-     * Tests that getCell retrieves the correct symbol from a cell.
+     * Tests that the board shares reference with the passed array.
      */
     @Test
-    void testGetCell() {
-        Board board = new Board();
-        assertEquals('5', board.getCell(1, 1));
+    void testBoardReferenceSharing() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        arr[0][1] = "  O  ";
+        assertEquals("  O  ", board.board[0][1]);
     }
 
     /**
-     * Tests that printing the board does not throw an exception.
+     * Tests that the board is a 3*3 array.
      */
     @Test
-    void testPrintBoardDoesNotThrow() {
-        Board board = new Board();
-        assertDoesNotThrow(board::printBoard);
+    void testBoardIs3x3() {
+        String[][] arr = {
+                {"  1  ", "  2  ", "  3  "},
+                {"  4  ", "  5  ", "  6  "},
+                {"  7  ", "  8  ", "  9  "}
+        };
+        Board board = new Board(arr);
+        assertEquals(3, board.board.length);
+        assertEquals(3, board.board[0].length);
     }
 }
